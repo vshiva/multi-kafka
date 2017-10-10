@@ -21,6 +21,8 @@ ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
 # Supervisor config
 ADD supervisor/kafka.conf supervisor/kafka2.conf supervisor/zookeeper.conf /etc/supervisor/conf.d/
 
+ADD config/server.properties config/server2.properties $KAFKA_HOME/config/
+
 # 2181 is zookeeper, 9092 is kafka 9192 is kafka2
 EXPOSE 2181 9092 9192
 
