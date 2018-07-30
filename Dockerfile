@@ -18,11 +18,12 @@ RUN apt-get update && \
     rm /tmp/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION".tgz
 
 ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
+ADD scripts/config.py $KAFKA_HOME/bin
 
 # Supervisor config
 ADD supervisor/kafka.conf supervisor/kafka2.conf supervisor/zookeeper.conf /etc/supervisor/conf.d/
 
-ADD config/server.properties config/server2.properties $KAFKA_HOME/config/
+ADD config/server.properties.template config/server2.properties.template $KAFKA_HOME/config/
 
 # 2181 is zookeeper, 9092 is kafka 9192 is kafka2
 EXPOSE 2181 9092 9192
