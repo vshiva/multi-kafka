@@ -21,7 +21,7 @@ inter.broker.listener.name=REPLICATION
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
 advertised.host.name=${kafka_hostname}
-advertised.listeners=CLIENT://${kafka_hostname}:9192,REPLICATION://0.0.0.0:9193
+advertised.listeners=CLIENT://${kafka_hostname}:9192,REPLICATION://${kafka_hostname}:9193
 
 ############################# Log Basics #############################
 
