@@ -2,6 +2,34 @@
 
 set -eo pipefail
 
+create_topic() {
+  zkroot="$1"; shift
+  topic="$1"; shift
+  partitions="$1"; shift
+  repl="$1"; shift
+  
+  echo zkhost=$zkhost zkroot=$zkroot topic=$topic partitions=$partitions replfactor=$repl
+
+  kafka-topics.sh \
+    --create --if-not-exists \
+    --zookeeper $zkhost:2181/$zkroot \
+    --replication-factor $repl \
+    --partitions $partitions \
+    --topic $topic "$@"
+}
+
+create_default_topics() {
+  # one or more topics which are comma seperated in the format
+  # zkroot1:topic1:partitions:replication,zkroot2:topic2:partitions:replication
+  topics="$1"
+
+  for i in $(echo $topics | sed "s/,/ /g")
+  do
+      local _a=($(echo "$i" | tr ':' '\n'))
+      create_topic ${_a[0]} ${_a[1]} ${_a[2]} ${_a[3]}
+  done
+}
+
 check_tries() {
   local max_tries=60
   if [ ${1} -ge ${max_tries} ]; then
@@ -62,3 +90,5 @@ wait_for_it() {
 zkhost=${1:-localhost}
 await_zookeeper ${zkhost}
 await_kafka_up ${zkhost}
+
+create_default_topics $DEFAULT_TOPICS

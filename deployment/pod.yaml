@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafka
+  labels:
+    app: kafka
+spec:
+  hostname: kafka
+  subdomain: integ
+  containers:
+  - name: server
+    image: vshiva/multi-kafka:latest
+    env:
+    - name: KAFKA_HOSTNAME
+      value: kafka.integ
+    ports:
+    - name: broker1
+      containerPort: 9092
+      hostPort: 9092
+      protocol: TCP
+    - name: broker2
+      containerPort: 9192
+      hostPort: 9192
+      protocol: TCP
+    - name: zk
+      containerPort: 2181
+      hostPort: 2181
+      protocol: TCP
+    livenessProbe:
+      tcpSocket:
+        port: 2181
+      initialDelaySeconds: 10
+      periodSeconds: 15
+    readinessProbe:
+      exec:
+        command:
+          - /usr/bin/ready-kafka.sh
+      initialDelaySeconds: 15
+      periodSeconds: 20
