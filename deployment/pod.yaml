@@ -10,9 +10,6 @@ spec:
   containers:
   - name: server
     image: vshiva/multi-kafka:latest
-    env:
-    - name: KAFKA_HOSTNAME
-      value: kafka.integ
     ports:
     - name: broker1
       containerPort: 9092
