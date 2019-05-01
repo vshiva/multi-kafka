@@ -5,8 +5,6 @@ metadata:
   labels:
     app: kafka
 spec:
-  hostname: kafka
-  subdomain: integ
   containers:
   - name: server
     image: vshiva/multi-kafka:latest
