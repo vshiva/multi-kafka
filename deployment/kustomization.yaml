@@ -1,2 +1,2 @@
 resources:
-- statefulset.yaml
+- pod.yaml
