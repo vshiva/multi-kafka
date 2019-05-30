@@ -14,13 +14,19 @@ offsets.topic.replication.factor=1
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
 listeners=CLIENT://0.0.0.0:9092,REPLICATION://0.0.0.0:9093
-listener.security.protocol.map=REPLICATION:PLAINTEXT,CLIENT:PLAINTEXT,PLAINTEXT:PLAINTEXT
+listener.security.protocol.map=REPLICATION:PLAINTEXT,CLIENT:${kafka_tls},PLAINTEXT:PLAINTEXT
 inter.broker.listener.name=REPLICATION
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
 advertised.host.name=${kafka_hostname}
 advertised.listeners=CLIENT://${kafka_hostname}:9092,REPLICATION://${kafka_hostname}:9093
+
+ssl.keystore.location = /etc/kafka/certs/server-keystore.jks
+ssl.keystore.password = ${jks_passwd}
+ssl.key.password = ${jks_passwd}
+ssl.truststore.location = /etc/kafka/certs/server-truststore.jks
+ssl.truststore.password = ${jks_passwd}
 
 ############################# Log Basics #############################
 
