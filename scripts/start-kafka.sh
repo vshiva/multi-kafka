@@ -3,6 +3,11 @@
 _jks_passwd="na"
 _protocol="PLAINTEXT"
 
+TLS_KEY="${TLS_KEY:-/etc/kafka/certs/tls.key}"
+TLS_CERT="${TLS_CERT:-/etc/kafka/certs/tls.crt}"
+TLS_CA_CERT="${TLS_CERT:-/etc/kafka/certs/ca.crt}"
+TLS_CLIENT_CA_CERT="${TLS_CERT:-/etc/kafka/certs/client-ca.crt}"
+
 if [ "$ENABLE_TLS" == "true" ]; then
 
     _jks_passwd=`openssl rand -hex 12`
@@ -10,11 +15,6 @@ if [ "$ENABLE_TLS" == "true" ]; then
     _tmpdir=$(mktemp -d)
     _protocol="SSL"
     
-    TLS_KEY=/etc/kafka/certs/tls.key
-    TLS_CERT=/etc/kafka/certs/tls.crt
-    TLS_CA_CERT=/etc/kafka/certs/ca.crt
-    TLS_CLIENT_CA_CERT=/etc/kafka/certs/client-ca.crt
-
     if [[ -f "$TLS_KEY" && -f "$TLS_KEY" && -f "$TLS_CA_CERT" ]]; then
 
         # Export TLS certs in PKCS12 format
