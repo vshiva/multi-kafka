@@ -11,7 +11,7 @@ TLS_CLIENT_CA_CERT="${TLS_CLIENT_CA_CERT:-/etc/kafka/certs/client-ca.crt}"
 if [ "$ENABLE_TLS" == "true" ]; then
 
     _jks_passwd=`openssl rand -base64 6`
-    _jks_dir=/etc/kafka/jks
+    _jks_dir=$2
     _tmpdir=$(mktemp -d)
     _protocol="SSL"
     rm -rf ${_jks_dir}

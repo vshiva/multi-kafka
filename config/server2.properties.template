@@ -23,10 +23,10 @@ inter.broker.listener.name=REPLICATION
 advertised.host.name=${kafka_hostname}
 advertised.listeners=CLIENT://${kafka_hostname}:9192,REPLICATION://${kafka_hostname}:9193
 
-ssl.keystore.location = /etc/kafka/jks/server-keystore.jks
+ssl.keystore.location = /etc/kafka2/jks/server-keystore.jks
 ssl.keystore.password = ${jks_passwd}
 ssl.key.password = ${jks_passwd}
-ssl.truststore.location = /etc/kafka/jks/server-truststore.jks
+ssl.truststore.location = /etc/kafka2/jks/server-truststore.jks
 ssl.truststore.password = ${jks_passwd}
 
 ############################# Log Basics #############################
