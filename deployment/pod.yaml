@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: server
-    image: vshiva/multi-kafka:latest
+    image: vshiva/multi-kafka:2.3.0
     ports:
     - name: broker1
       containerPort: 9092
@@ -32,3 +32,6 @@ spec:
           - /usr/bin/ready-kafka.sh
       initialDelaySeconds: 15
       periodSeconds: 20
+      failureThreshold: 3
+      successThreshold: 3
+      timeoutSeconds: 10
