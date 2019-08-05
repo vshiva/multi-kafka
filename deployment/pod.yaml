@@ -31,7 +31,6 @@ spec:
         command:
           - /usr/bin/ready-kafka.sh
       initialDelaySeconds: 15
-      periodSeconds: 20
-      failureThreshold: 3
-      successThreshold: 3
-      timeoutSeconds: 10
+      periodSeconds: 30
+      failureThreshold: 10
+      timeoutSeconds: 30
